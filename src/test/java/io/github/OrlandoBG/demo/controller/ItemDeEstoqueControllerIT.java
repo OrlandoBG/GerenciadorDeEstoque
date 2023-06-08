@@ -42,26 +42,22 @@ public class ItemDeEstoqueControllerIT {
 
     @Test
     public void obterPorIdDeveriaRetornarItemDeEstoque()throws Exception{
-        Long id = 1L;
-        ObjectMapper objectMapper = new ObjectMapper();
-        String jsonBody = objectMapper.writeValueAsString(id);
+
         ResultActions result =
-                mockMvc.perform(get("/itens-de-Estoque")
-                        .content(jsonBody)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .accept(MediaType.APPLICATION_JSON));
+                mockMvc.perform(get("/itens-de-Estoque/{id}",1)
+                        .contentType(MediaType.APPLICATION_JSON));
 
         result.andExpect(status().isOk());
-        result.andExpect(jsonPath("$[0].id").value(1L));
-        result.andExpect(jsonPath("$[0].nome").value("coca cola"));
+        result.andExpect(jsonPath("$.id").value(1L));
+        result.andExpect(jsonPath("$.nome").value("coca cola"));
 
     }
 
     @Test
     public void salvarDeveriaRetornarItemDeEstoque()throws Exception{
-        String nome = "Coca cola";
+        String nome = "coca cola";
         String unidadeDeMedida = "Packs";
-        ItemDeEstoque itemDeEstoque = new ItemDeEstoque(1L,"Coca cola","Packs",6,20,3);
+        ItemDeEstoque itemDeEstoque = new ItemDeEstoque(1L,"coca cola","Packs",6,20,3);
 
         ObjectMapper objectMapper = new ObjectMapper();
         String jsonBody = objectMapper.writeValueAsString(itemDeEstoque);
