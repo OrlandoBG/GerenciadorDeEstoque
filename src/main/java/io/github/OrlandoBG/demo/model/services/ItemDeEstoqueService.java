@@ -23,4 +23,9 @@ public class ItemDeEstoqueService {
         return repository.findById(id).get();
     }
 
+    @Transactional
+    public ItemDeEstoque salvar(ItemDeEstoque itemDeEstoque){
+        return repository.save(itemDeEstoque);
+    }
+
 }

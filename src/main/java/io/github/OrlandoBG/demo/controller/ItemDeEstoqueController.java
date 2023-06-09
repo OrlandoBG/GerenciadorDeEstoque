@@ -4,11 +4,10 @@ import io.github.OrlandoBG.demo.model.entities.ItemDeEstoque;
 import io.github.OrlandoBG.demo.model.services.ItemDeEstoqueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -28,5 +27,13 @@ public class ItemDeEstoqueController {
     public ResponseEntity<ItemDeEstoque> obterPorId(@PathVariable Long id){
         ItemDeEstoque itemDeEstoque = service.obterPorId(id);
         return ResponseEntity.ok().body(itemDeEstoque);
+    }
+
+    @PostMapping
+    public ResponseEntity<ItemDeEstoque> salvar(@RequestBody ItemDeEstoque itemDeEstoqueRequest){
+        ItemDeEstoque itemDeEstoque = service.salvar(itemDeEstoqueRequest);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+                .buildAndExpand(itemDeEstoqueRequest.getId()).toUri();
+        return  ResponseEntity.created(uri).body(itemDeEstoque);
     }
 }
