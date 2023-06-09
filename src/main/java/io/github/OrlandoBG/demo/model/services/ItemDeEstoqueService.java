@@ -17,4 +17,10 @@ public class ItemDeEstoqueService {
     public List<ItemDeEstoque> obterTodos(){
         return repository.findAll();
     }
+
+    @Transactional(readOnly = true)
+    public ItemDeEstoque obterPorId(Long id){
+        return repository.findById(id).get();
+    }
+
 }
