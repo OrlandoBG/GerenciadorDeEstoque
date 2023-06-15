@@ -34,6 +34,13 @@ public class MovimentacaoDeEstoqueController {
         Page<MovimentacaoDeEstoque> movimentacaoDeEstoquepagina = service.ObterPorItemDeEstoque(pageRequest,itemDeEstoqueId);
         return ResponseEntity.ok().body(movimentacaoDeEstoquepagina);
     }
-
+    
+    @PostMapping
+    public ResponseEntity<MovimentacaoDeEstoque> salvar(@RequestBody  MovimentacaoEstoqueDTO movimentacaoDeEstoqueDTO){
+        MovimentacaoDeEstoque movimentacaoDeEstoque = service.salvar(movimentacaoDeEstoqueDTO);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+                .buildAndExpand(movimentacaoDeEstoqueDTO.getId()).toUri();
+        return ResponseEntity.created(uri).body(movimentacaoDeEstoque);
+    }
 
 }
