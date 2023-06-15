@@ -33,4 +33,26 @@ public class MovimentacaoDeEstoqueService {
         return movimentacaoDeEstoquePagina;
     }
 
+    
+    @Transactional
+    public MovimentacaoDeEstoque salvar(@RequestBody MovimentacaoEstoqueDTO movimentacaoDeEstoqueDTO){
+        MovimentacaoDeEstoque movimentacaoDeEstoque = new MovimentacaoDeEstoque();
+        movimentacaoDeEstoque.setId(movimentacaoDeEstoqueDTO.getId());
+        movimentacaoDeEstoque.setTipoDeMovimentacao(movimentacaoDeEstoqueDTO.getTipoDeMovimentacao());
+        movimentacaoDeEstoque.setData(LocalDate.parse(movimentacaoDeEstoqueDTO.getData(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        movimentacaoDeEstoque.setQuantidade(movimentacaoDeEstoqueDTO.getQuantidade());
+        movimentacaoDeEstoque.setItemDeEstoque(new ItemDeEstoque(movimentacaoDeEstoqueDTO.getItemDeEstoque().getId(), null,null,null,null,null));
+
+        ItemDeEstoque itemDeEstoque = itemDeEstoqueRepository.findById(movimentacaoDeEstoque.getItemDeEstoque().getId()).get();
+        Integer quantidadeItemAntiga = itemDeEstoque.getQuantidadeTotal();
+
+        if(movimentacaoDeEstoque.getTipoDeMovimentacao().name() == "ENTRADA"){
+            itemDeEstoqueService.atualizar(movimentacaoDeEstoque.getItemDeEstoque().getId(),quantidadeItemAntiga + movimentacaoDeEstoque.getQuantidade());
+        }
+        if(movimentacaoDeEstoque.getTipoDeMovimentacao().name() == "SAIDA"){
+            itemDeEstoqueService.atualizar(movimentacaoDeEstoque.getItemDeEstoque().getId(),quantidadeItemAntiga - movimentacaoDeEstoque.getQuantidade());
+        }
+
+        return repository.save(movimentacaoDeEstoque);
+    }
 }
