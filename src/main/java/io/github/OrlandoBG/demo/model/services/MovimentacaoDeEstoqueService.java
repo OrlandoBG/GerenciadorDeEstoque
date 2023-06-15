@@ -1,5 +1,6 @@
 package io.github.OrlandoBG.demo.model.services;
 
+import io.github.OrlandoBG.demo.controller.dto.MovimentacaoEstoqueDTO;
 import io.github.OrlandoBG.demo.model.entities.ItemDeEstoque;
 import io.github.OrlandoBG.demo.model.entities.MovimentacaoDeEstoque;
 import io.github.OrlandoBG.demo.model.repository.ItemDeEstoqueRepository;
@@ -9,7 +10,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -17,6 +21,9 @@ public class MovimentacaoDeEstoqueService {
 
     @Autowired
     private MovimentacaoDeEstoqueRepository repository;
+
+    @Autowired
+    private ItemDeEstoqueService itemDeEstoqueService;
 
     @Autowired
     private ItemDeEstoqueRepository itemDeEstoqueRepository;

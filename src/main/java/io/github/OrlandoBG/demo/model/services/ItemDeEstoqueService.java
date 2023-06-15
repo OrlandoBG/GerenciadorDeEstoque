@@ -28,4 +28,11 @@ public class ItemDeEstoqueService {
         return repository.save(itemDeEstoque);
     }
 
+    @Transactional
+    public void atualizar(Long id, Integer quantidade){
+        ItemDeEstoque itemDeEstoque = repository.findById(id).get();
+        itemDeEstoque.setQuantidadeTotal(quantidade);
+        repository.save(itemDeEstoque);
+    }
+
 }

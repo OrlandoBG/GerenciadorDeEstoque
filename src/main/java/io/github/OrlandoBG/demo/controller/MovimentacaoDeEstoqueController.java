@@ -1,16 +1,16 @@
 package io.github.OrlandoBG.demo.controller;
 
+import io.github.OrlandoBG.demo.controller.dto.MovimentacaoEstoqueDTO;
 import io.github.OrlandoBG.demo.model.entities.MovimentacaoDeEstoque;
 import io.github.OrlandoBG.demo.model.services.MovimentacaoDeEstoqueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -36,7 +36,7 @@ public class MovimentacaoDeEstoqueController {
     }
     
     @PostMapping
-    public ResponseEntity<MovimentacaoDeEstoque> salvar(@RequestBody  MovimentacaoEstoqueDTO movimentacaoDeEstoqueDTO){
+    public ResponseEntity<MovimentacaoDeEstoque> salvar(@RequestBody MovimentacaoEstoqueDTO movimentacaoDeEstoqueDTO){
         MovimentacaoDeEstoque movimentacaoDeEstoque = service.salvar(movimentacaoDeEstoqueDTO);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(movimentacaoDeEstoqueDTO.getId()).toUri();
