@@ -1,13 +1,14 @@
 package io.github.OrlandoBG.demo.service;
 
-import io.github.OrlandoBG.GerenciadorDeEstoque.model.entidade.ItemDeEstoque;
-import io.github.OrlandoBG.GerenciadorDeEstoque.model.entidade.MovimentacaoDeEstoque;
-import io.github.OrlandoBG.GerenciadorDeEstoque.model.entidade.TipoDeMovimentacao;
-import io.github.OrlandoBG.GerenciadorDeEstoque.model.entidade.dto.MovimentacaoEstoqueDTO;
-import io.github.OrlandoBG.GerenciadorDeEstoque.model.repository.ItemDeEstoqueRepository;
-import io.github.OrlandoBG.GerenciadorDeEstoque.model.repository.MovimentacaoDeEstoqueRepository;
-import io.github.OrlandoBG.GerenciadorDeEstoque.model.service.ItemDeEstoqueService;
-import io.github.OrlandoBG.GerenciadorDeEstoque.model.service.MovimentacaoDeEstoqueService;
+
+import io.github.OrlandoBG.demo.controller.dto.MovimentacaoEstoqueDTO;
+import io.github.OrlandoBG.demo.model.entities.ItemDeEstoque;
+import io.github.OrlandoBG.demo.model.entities.MovimentacaoDeEstoque;
+import io.github.OrlandoBG.demo.model.entities.TipoDeMovimentacao;
+import io.github.OrlandoBG.demo.model.repository.ItemDeEstoqueRepository;
+import io.github.OrlandoBG.demo.model.repository.MovimentacaoDeEstoqueRepository;
+import io.github.OrlandoBG.demo.model.services.ItemDeEstoqueService;
+import io.github.OrlandoBG.demo.model.services.MovimentacaoDeEstoqueService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
